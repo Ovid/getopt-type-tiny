@@ -172,8 +172,11 @@ arguments to C<get_opts> are a list of option specifications.
 Option specifications are passed to C<get_opts> as a list of key/value pairs. If no
 option spec is passed, the option is assumed to be a boolean option:
 
-    my %options = get_opts(
-    );
+    my %options = get_opts( qw/
+      dryrun
+      enabled
+      verbose
+    / );
 
 =over 4
 

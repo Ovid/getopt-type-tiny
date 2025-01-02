@@ -51,8 +51,11 @@ Option specifications are passed to `get_opts` as a list of key/value pairs. If 
 option spec is passed, the option is assumed to be a boolean option:
 
 ```perl
-my %options = get_opts(
-);
+my %options = get_opts( qw/
+  dryrun
+  enabled
+  verbose
+/ );
 ```
 
 - isa
