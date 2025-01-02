@@ -21,8 +21,6 @@ my %opts = get_opts(
 #    foo     => 'value of foo',
 #    bar     => 42,
 #    verbose => 1,
-#    help    => 0,
-#    man     => 0,
 # )    
 ```
 
