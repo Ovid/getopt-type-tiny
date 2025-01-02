@@ -1,6 +1,8 @@
+# Veure settings for Perl::Tidy
+#
 # Common parameters
 --break-at-old-comma-breakpoints
---maximum-line-length=160
+--maximum-line-length=78
 --indent-columns=4
 --continuation-indentation=2
 --standard-error-output
@@ -26,3 +28,10 @@
 
 # run at least twice to improve stability
 --iterations=2
+
+# Ignore DBIC-generated content
+--format-skipping-begin='#(<<<| DO NOT MODIFY THE FIRST PART OF THIS FILE)'
+--format-skipping-end='#(>>>| DO NOT MODIFY THIS OR ANYTHING ABOVE!)'
+
+# no space after the colon for sub attributes
+--nowant-right-space="A"

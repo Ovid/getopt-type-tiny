@@ -4,7 +4,7 @@ use v5.20.0;
 use feature 'postderef';
 use Test::Most;
 use PerlX::Maybe       qw(maybe);
-use Getopt::Type::Tiny qw(get_opts Str Int Bool);
+use Getopt::Type::Tiny qw(get_opts ArrayRef Str Int Bool);
 
 # Helper function to simulate command line arguments
 sub with_args {
@@ -17,8 +17,8 @@ my @test_cases = (
     'Basic functionality' => {
         argv => [ '--foo', 'test', '--bar', '42', '--baz' ],
         spec => [
-            'foo=s' => { isa => Str },
-            'bar=i' => { isa => Int },
+            'foo' => { isa => Str },
+            'bar' => { isa => Int },
             'baz',
         ],
         expected => {
@@ -29,9 +29,9 @@ my @test_cases = (
     },
     'Default values' => {
         spec => [
-            'foo=s' => { default => 'default_foo' },
-            'bar=i' => { default => 10 },
-            'baz'   => { default => 0 },
+            'foo' => { default => 'default_foo', isa => Str },
+            'bar' => { default => 10,            isa => Int },
+            'baz' => { default => 0 },
         ],
         expected => {
             foo => 'default_foo',
@@ -40,22 +40,22 @@ my @test_cases = (
         },
     },
     'Required options' => {
-        spec     => [ 'foo=s' => { required => 1 } ],
+        spec     => [ 'foo' => { required => 1, isa => Int } ],
         expected => qr/Required option 'foo' is missing/,
     },
     'Required option provided' => {
         argv     => [ '--foo', 'bar' ],
-        spec     => [ 'foo=s' => { required => 1 } ],
+        spec     => [ foo => { required => 1, isa => Str } ],
         expected => { foo => 'bar' },
     },
     'Type checking' => {
         argv     => [ '--foo', 'not_an_int' ],
-        spec     => [ 'foo=s' => { isa => Int } ],
+        spec     => [ 'foo' => { isa => Int } ],
         expected => qr/Invalid value for option 'foo'/,
     },
     'Renaming options' => {
         argv     => [ '--foo', 'test' ],
-        spec     => [ 'foo=s' => { rename => 'bar' } ],
+        spec     => [ 'foo' => { rename => 'bar', isa => Str } ],
         expected => { bar => 'test' },
     },
     'Boolean options' => {
@@ -67,6 +67,16 @@ my @test_cases = (
         argv     => ['--nofoo'],
         spec     => ['foo!'],
         expected => { foo => 0 },
+    },
+    'Multi-valued options' => {
+        argv     => [ '--foo',  'bar', '--foo', 'baz' ],
+        spec     => [ 'foo=s@', { isa => ArrayRef [Str] } ],
+        expected => { foo => [ 'bar', 'baz' ] },
+    },
+    'Multi-valued options without options' => {
+        argv     => [],
+        spec     => [ 'foo=s@', { isa => ArrayRef [Str], default => sub { [] } } ],
+        expected => { foo => [] },
     },
 );
 

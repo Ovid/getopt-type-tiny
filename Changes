@@ -2,4 +2,4 @@ Revision history for Getopt-Type-Tiny
 
 {{$NEXT}}
 
-          - Create shell for Getopt::Type::Tiny
+          - Typed Getopt::Long replacement
