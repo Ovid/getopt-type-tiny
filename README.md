@@ -1,20 +1,30 @@
+# NAME
+
+Getopt::Type::Tiny - Clean Getopt::Long wrapper with Type::Tiny support
+
+# VERSION
+
+version 0.01
+
 # SYNOPSIS
 
-    use Getopt::Type::Tiny qw(get_opts Str Int);
-    my %opts = get_opts(
-        foo => { isa => Str },
-        bar => { isa => Int, default => 42 },
-        'verbose|v', # defaults to Bool
-    );
-    
-    # %opts now contains the parsed options:
-    # (
-    #    foo     => 'value of foo',
-    #    bar     => 42,
-    #    verbose => 1,
-    #    help    => 0,
-    #    man     => 0,
-    # )    
+```perl
+use Getopt::Type::Tiny qw(get_opts Str Int);
+my %opts = get_opts(
+    foo => { isa => Str },
+    bar => { isa => Int, default => 42 },
+    'verbose|v', # defaults to Bool
+);
+
+# %opts now contains the parsed options:
+# (
+#    foo     => 'value of foo',
+#    bar     => 42,
+#    verbose => 1,
+#    help    => 0,
+#    man     => 0,
+# )    
+```
 
 # DESCRIPTION
 
@@ -26,11 +36,13 @@ parse command line options with type constraints.
 
 ## get\_opts
 
-    my %opts = get_opts(
-        foo => { isa => Str },
-        bar => { isa => Int, default => 42 },
-        'verbose|v', # defaults to Bool
-    );
+```perl
+my %opts = get_opts(
+    foo => { isa => Str },
+    bar => { isa => Int, default => 42 },
+    'verbose|v', # defaults to Bool
+);
+```
 
 Parses the command line options and returns a hash of the parsed options. The
 arguments to `get_opts` are a list of option specifications.
@@ -40,8 +52,10 @@ arguments to `get_opts` are a list of option specifications.
 Option specifications are passed to `get_opts` as a list of key/value pairs. If no
 option spec is passed, the option is assumed to be a boolean option:
 
-    my %options = get_opts(
-    );
+```perl
+my %options = get_opts(
+);
+```
 
 - isa
 
@@ -77,14 +91,32 @@ display the full documentation and exit.
 Currently, we do not natively support multi-valued options. You can use
 [GetOpt::Long](https://metacpan.org/pod/GetOpt%3A%3ALong) style multi-valued options:
 
-    my %opt_for = get_opts(
+```perl
+my %opt_for = get_opts(
 
-        # default should be a subref to ensure we don't get the same arrayref
-        # if this is called multiple times, but it's not strictly necessary
-        # default => [] works if this is called only once
-        'servers=s@' => { isa => ArrayRef [Str], default => sub { [] } },
-    );
+    # default should be a subref to ensure we don't get the same arrayref
+    # if this is called multiple times, but it's not strictly necessary
+    # default => [] works if this is called only once
+    'servers=s@' => { isa => ArrayRef [Str], default => sub { [] } },
+);
+```
 
 And as called from the command line:
 
-    perl my_script.pl --servers=server1 --servers=server2 --servers=server3
+```perl
+perl my_script.pl --servers=server1 --servers=server2 --servers=server3
+```
+
+# AUTHOR
+
+Curtis "Ovid" Poe <curtis.poe@gmail.com>
+
+# COPYRIGHT AND LICENSE
+
+This software is Copyright (c) 2025 by Curtis "Ovid" Poe.
+
+This is free software, licensed under:
+
+```
+The Artistic License 2.0 (GPL Compatible)
+```
