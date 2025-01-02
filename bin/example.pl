@@ -1,5 +1,7 @@
 #!/usr/bin/env perl
 
+# PODNAME: example.pl - Example of Getopt::Type::Tiny
+
 use v5.40.0;
 use lib 'lib';
 use Getopt::Type::Tiny qw(get_opts Str Int);
