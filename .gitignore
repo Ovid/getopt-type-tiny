@@ -1,0 +1,17 @@
+/MANIFEST
+/MANIFEST.bak
+/MYMETA.*
+/Makefile
+/Makefile.old
+/blib/
+/pm_to_blib
+*~
+*.sw[pon]
+errors.err
+*#
+.#*
+/Getopt-Type-Tiny-*/
+/Getopt-Type-Tiny-*.tar
+/Getopt-Type-Tiny-*.tar.gz
+/cover_db/
+/.build/
