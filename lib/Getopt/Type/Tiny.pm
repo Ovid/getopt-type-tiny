@@ -146,8 +146,6 @@ __END__
     #    foo     => 'value of foo',
     #    bar     => 42,
     #    verbose => 1,
-    #    help    => 0,
-    #    man     => 0,
     # )    
 
 =head1 DESCRIPTION

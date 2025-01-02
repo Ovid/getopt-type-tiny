@@ -39,7 +39,6 @@ options;
     #    foo     => 'value of foo',
     #    bar     => 42,
     #    verbose => 1,
-    #    help    => 0,
     # )
 
 =head1 FUNCTIONS
